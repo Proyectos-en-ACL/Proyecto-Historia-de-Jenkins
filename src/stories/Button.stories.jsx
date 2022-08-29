@@ -1,40 +1,27 @@
-import React from 'react';
+import React from "react";
+import {storiesOf} from "@storybook/react"
+import Button from "./Button"
+import {withKnobs, text, select, boolean, number} from "@storybook/addon-knobs"
 
-import { Button } from './Button';
+const tiposSaludo = ["Buen dia", "Hola" , "Como estas"]
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-  title: 'Example/Button',
-  component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-};
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <Button {...args} />;
-
-export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-  primary: true,
-  label: 'Button',
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Button',
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
-};
+storiesOf("Botones", module)
+  .addDecorator(withKnobs)
+  .addParameters({
+    saludo: "Holis"
+  })
+  .add("Default", () => {
+    return <Button saludo ={text("saludo", "Buen día")}></Button>;
+  })
+  .add("Secondary", () => {
+    return <Button saludo = "Como estas?"></Button>;
+  })
+  .add("Boolean", () => {
+    return <Button saludo ={boolean("saludo", true)}></Button>;
+  })
+  .add("Numero", () => {
+    return <Button saludo ={number("saludo", 2)}></Button>;
+  })
+  .add("Seleccionable", () => {
+    return <Button saludo = {select("Como saluda", tiposSaludo, tiposSaludo[0])}></Button>;
+  })
