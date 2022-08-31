@@ -5,7 +5,7 @@ import {withKnobs, text, select, boolean, number} from "@storybook/addon-knobs"
 
 const tiposSaludo = ["Buen dia", "Hola" , "Como estas"]
 
-storiesOf("Botones", module)
+storiesOf("Atomos/Botones", module)
   .addDecorator(withKnobs)
   .addParameters({
     saludo: "Holis"
